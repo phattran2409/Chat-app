@@ -1,7 +1,9 @@
 "use client";
 import useNavigation from "@/app/hook/useNavigation";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ThemeToggle } from "@/components/ui/theme/theme-toggle";
 import {
   Tooltip,
   TooltipProvider,
@@ -29,11 +31,23 @@ export default function MobileNavbar() {
                       >
                         {path.icon}
                       </Button>
+
+                      {path.count ? (
+                        <Badge
+                          className="absolute left-6 bottom-6 w-2 rounded-lg flex justify-center items-center"
+                          variant="destructive"
+                        >
+                          {path.count > 100 ? 99 : path.count}
+                        </Badge>
+                      ) : null} 
                     </Link>
                   </TooltipTrigger>
                 </Tooltip>
               </li>
             ))}
+            <li>
+              <ThemeToggle />
+            </li>
 
             <div className="">
               <UserButton />

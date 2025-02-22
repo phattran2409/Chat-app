@@ -1,5 +1,9 @@
+import ConversationContainer from "@/app/component/conversation/conversationContainer";
+
 export default function conversationDetails(params) {
     return ( 
-        <div></div>
+        <ConversationContainer>
+            Conversation detail
+        </ConversationContainer>
     )
 };

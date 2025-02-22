@@ -1,13 +1,15 @@
 import React from "react";
 import SideBarWrapper from "../component/sidebar/page";
 import ItemList from "../component/item-list/ItemList";
+import { AddfriendDialog } from "./_components/AddFriend";
+
 
 export default function Friendlayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{ children: React.ReactNode }>) { 
   return (
     <SideBarWrapper>
-      <ItemList title="Friend"></ItemList>
+   
       {children}
     </SideBarWrapper>
   );

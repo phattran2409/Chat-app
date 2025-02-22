@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ConvexClientProvider } from "./ConvexClientProvider";
-import SideBarWrapper from "./component/sidebar/page";
-
+import { ThemeProvider } from "@/components/ui/theme/theme-provider";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { Toaster } from "@/components/ui/toaster";
+import { ToastContainer } from "react-toastify";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,10 +31,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <ConvexClientProvider>
-           {children}
+            <TooltipProvider>{children}</TooltipProvider>
+            <ToastContainer/>
+            <Toaster />
           </ConvexClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
