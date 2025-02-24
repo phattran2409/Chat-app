@@ -11,7 +11,7 @@ import { toast } from "react-toastify"
 import { ConvexError } from "convex/values"
 
 interface Props {
-    id: string;
+    id: Id<"requests">;
   imageUrl: string;
   userName: string;
   email: string;
@@ -20,8 +20,25 @@ interface Props {
   const RequestComponent: React.FC<Props> = ({ id, imageUrl, userName, email }) => {
     const {mutate : denyRequest , pending : denyPending  } = useMutationState(api.request.deny)
 
+     const { mutate: acceptRequest , pending: acceptPending  } = useMutationState(
+       api.request.accept
+     );
+     
+
+     const _handleAcceptRequest = (id : any) => { 
+      console.log("id Request ", {id});
+        acceptRequest(id).then(() => {
+          toast.success("Friend accept request")
+        }).catch((err) => { 
+          toast.error(
+            err instanceof ConvexError ? err.data : "Unexpected error occured"
+          );
+        })
+     }
+
+
     const _handleDenyRequest = (id : any) => {
-        denyRequest({id}).then( () => {
+        denyRequest(id).then( () => {
             toast.success("Friend Request denied")
         }
         ).catch((err) => { 
@@ -43,7 +60,7 @@ interface Props {
           </div>
         </div>
         <div className="flex items-center gap-2  md:pr-5 lg:pr-0">
-          <Button className="btn-accept-Friend" size="icon" onClick={() => {}}>
+          <Button disabled={denyPending} className="btn-accept-Friend" size="icon" onClick={() => _handleAcceptRequest({id})}>
             <Check />
           </Button>
           <Button
