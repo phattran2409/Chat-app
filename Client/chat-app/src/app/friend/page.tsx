@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react";
 import RequestComponent from "./_components/requestComponent";
 
 
-export default function FriendPage(params) {
+export default function FriendPage() {
     const requests = useQuery(api.requests.get)
   return (
     <>
