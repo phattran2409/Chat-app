@@ -26,6 +26,7 @@ export default defineSchema({
   })
     .index("by_user1", ["user1"])
     .index("by_user2", ["user2"])
+    .index("by_user1_user2" ,["user1" , "user2"])
     .index("by_conversationId", ["conversationId"]),
   // table conversations
   conversations: defineTable({

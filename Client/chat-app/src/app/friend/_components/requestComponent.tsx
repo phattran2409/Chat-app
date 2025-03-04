@@ -24,6 +24,9 @@ interface Props {
        api.request.accept
      );
      
+     const {mutate : listFriend , pending} = useMutationState(api.friend.remove)
+     
+     
 
      const _handleAcceptRequest = (id : any) => { 
       console.log("id Request ", {id});

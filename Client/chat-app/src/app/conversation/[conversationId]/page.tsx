@@ -8,7 +8,8 @@ import { Loader2 } from "lucide-react";
 import Header from "./_components/Header";
 import Body from "./_components/body/Body";
 import ChatBox from "./_components/input/ChatBox";
-import { tree } from "next/dist/build/templates/app-page";
+import RemoveFriendDialog from "./_components/dialog/RemoveFriendDialog";
+
 
 
 interface Props {
@@ -37,6 +38,8 @@ const ConversationDetails: React.FC<Props> = ({ params }) => {
     </p>
   ) : (
     <ConversationContainer>
+        <RemoveFriendDialog conversationId={conversationId} open={removeFriendDialogOpen} setOpen={setRemoveFriendDialogOpen}/>
+
       <Header
         imageUrl={
           conversation.isGroup ? "" : conversation.otherMember.imageUrl || ""
@@ -65,7 +68,7 @@ const ConversationDetails: React.FC<Props> = ({ params }) => {
                 
               }
             ]
-            : [
+            :( [
                 {
                   label : "Remove friend",
                   destructive : true, 
@@ -74,6 +77,7 @@ const ConversationDetails: React.FC<Props> = ({ params }) => {
                   },
                 }
             ]
+          )
         }
       />
       <Body />
